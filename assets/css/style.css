@@ -24,5 +24,7 @@
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
   }
-  
+  .card-header{
+    text-align: center;
+  }
   
