@@ -1,16 +1,74 @@
 /* Global variable */
 
-const weatherApiKey = "ebd153ae1727f03c10d93ef05e14e355";
-const weatherApiUrl = "api.openweathermap.org/data/2.5/";
-const unit = "metric";
-// const searchHistory = [];
-const weatherIconUrl = "openweathermap.org";
+var weatherApiKey = "ebd153ae1727f03c10d93ef05e14e355";
+var weatherApiUrl = "https://api.openweathermap.org/";
+var unit = "imperial";
+var weatherIconUrl = "https://openweathermap.org";
+// " http://openweathermap.org/img/wn/10d@2x.png"
 
-/* Dom element reference */
 
-var searchBtnEl = document.querySelector("search-btn");
-var cityNameHistoryEl = document.getElementById("clear-history-btn");
-var cityNameListEl = document.getElementById("city-list");
+
+
+const inputTxtEl = document.getElementById("searchTextField");
+const searchBtnEl = document.getElementById("search-btn");
+const clearBtnEl = document.getElementById("clear-search-history");
+const searchHistoryEl = document.getElementById("search_history");
+const searchHistory = [];
+
+
+
+/* -------------------------------------------------------------------  */
+/*                              Get Weather                             */
+/* -------------------------------------------------------------------  */
+//   let weatherURL = + weatherApiUrl + "data/2.5/weather?q=" + searchTextField + "&appid=" + weatherApiKey + "&unit=" + unit;
+
+
+
+/* -------------------------------------------------------------------  */
+/* Show Weather */
+/* -------------------------------------------------------------------  */
+
+
+
+
+
+
+/* -------------------------------------------------------------------  */
+/*          Event listener search click event            */
+/* -------------------------------------------------------------------  */
+
+searchBtnEl.addEventListener("click", function () {
+  const lookupItem = inputTxtEl.value;
+  searchHistory.push(lookupItem);
+  localStorage.setItem("search", JSON.stringify(searchHistory));
+  showSearchHistory();
+})
+
+
+/* ------------------------------------------------------------------  */
+/*  Show History */
+/* ------------------------------------------------------------------  */
+function showSearchHistory(){
+  searchHistoryEl.innerHTML = "";
+  for(let i=0; i < searchHistory.length; i++){
+    const historyList = document.createElement("input");
+    historyList.setAttribute("class", "form-control d-block bg-white");
+    historyList.setAttribute("type", "text");
+    historyList.setAttribute("readonly", "true");
+    historyList.setAttribute("value", searchHistory[i]);
+    historyList.addEventListener("click", function(){
+      // TODO
+      // getWeather
+    })
+    searchHistoryEl.append(historyList);
+  }
+}
+  showSearchHistory();
+  if(searchHistory.length > 0){
+    // TODO
+    // getWeather
+}
+
 /* ------------------------------------------------------------------  */
 /* Google API autocomplete: enable Maps JavaScript API and Places API  */
 /* ------------------------------------------------------------------- */
