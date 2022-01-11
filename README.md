@@ -19,4 +19,4 @@ Two options are provided the first one is link and second one thats click me tha
 - [Button Generator](https://css3buttongenerator.com/)
 - [dashboard reference](https://pixinvent.com/modern-admin-clean-bootstrap-4-dashboard-html-template/html/ltr/horizontal-menu-template/card-weather.html)
 - [AutoComplete Google API](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)
-https://www.studytonight.com/post/how-to-build-a-weather-app-using-javascript-for-complete-beginners
+- [Build examples](https://www.studytonight.com/post/how-to-build-a-weather-app-using-javascript-for-complete-beginners)

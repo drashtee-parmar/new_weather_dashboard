@@ -45,3 +45,17 @@
 #city-form {
   width: 100%;
 }
+
+#forecastCard {
+  height: fit-content;
+  margin-top: .2vh;
+  margin-bottom: .2vh;
+  
+}
+img {
+  width: 90px;
+}
+h5, h6 {
+  text-align: center;
+  text-transform: uppercase;
+}
