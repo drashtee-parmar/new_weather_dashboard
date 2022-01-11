@@ -1,54 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>☀️ Weather Dashboard ☀️</title>
-        <!-- css -->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☀️ Weather Dashboard ☀️</title>
+    <!-- css -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-        <link rel="stylesheet" href="assets/css/style.css">
-        <!-- bootstrap icon: https://icons.getbootstrap.com/#icon-font -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-            integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- bootstrap icon: https://icons.getbootstrap.com/#icon-font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
 
-    </head>
+<body>
 
-
-    <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-primary justify-content-center">
             <h1>Weather Dashboard</h1>
         </nav>
-
         <div class="container">
             <div class="row">
-                <div class="col-3 bg-light">
-                    <p>Search for City</p>
-                    <input id="searchTextField" class="controls" type="text" placeholder="Enter the City Name" />
-                    <button class="btn btn-primary " type="submit" id="search-btn"><i class="bi bi-search"></i></button>
-                    <div id="map"></div>
+                <div class="col-3 bg-light card card-search">
+                    <h5>Search for a City</h5>
+                    <div class="input-group">
+                        <form action="" id="city-form">
+                            <input id="searchTextField" class="controls" type="text" autofocus="true"
+                                placeholder="Enter the City Name" />
+                            <button class="btn btn-primary " type="submit" id="search-btn"><i
+                                    class="bi bi-search"></i></button>
+                            <div id="map"></div>
+                        </form>
+                    </div>
                     <!-- <button class="btn btn-danger" type="button" id="clear-search-history"><i class="bi bi-archive-fill"> Clear </i></button> -->
-                    <form id="search_history"></form>
+                    <!-- <form id="search_history"></form> -->
+                    <div id="buttons" class="btn-group-vertical"></div>
                 </div>
-
-                <div class="col-9">
-                    <div class="card mb-3" style="max-width: 720px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <span id="city-name" class="city-name align-middle"></span>
-                                <img id="current-pic" src="placeholder" alt="">
-
-                                <img src="..." class="img-fluid rounded-start" alt="...">
+                <div class="col-9" id="current-weather">
+                    <!-- <div class="card mb-3" style="max-width: 720px;"> -->
+                    <h5>Today's Weather</h5>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="card today-card">
+                                <h5><span id="searched-city" class="city-name align-middle"></span></h5>
+                                <h5><span id="current-date"></span></h5>
+                                <img id="current-icon" src="" alt="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i>Temperature<i
+                                                class="bi bi-thermometer-high"></i> </th>
+                                        <th><i class="bi bi-wind"></i>Wind<i class="bi bi-wind"></i></th>
+                                        <th><i class="bi bi-moisture"></i>Humidity<i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-sun"></i>UV Index<i class="bi bi-sun"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="currentTemp"></span></td>
+                                        <td><span id="currentHumid"></span></td>
+                                        <td><span id="currentWind"></span></td>
+                                        <td><span id="currenUV"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>MPH</td>
+                                    </tr>
+                                </table>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <div class="card-header" id="todaysdate">
-
-                                    </div>
+                            <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
+                        </div>
+                        <!-- <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-header" id="todaysdate">
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
+                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
+                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
+                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- 5 days forecast -->
+            <!--  
+            <div class="container-fluid">
+                <div class="row-5-days ">
+                    <div class="col-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header" id="firstDay"></div>
+                                <div class="card">
+                                    <img class="card-img-top" src="" alt="">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
                                         <li class="list-group-item"><i class="bi bi-wind"></i></li>
@@ -59,94 +107,66 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-
-                    <!-- 5 days forecast -->
-                    <div class="container-fluid">
-                        <div class="row-5-days ">
-                            <div class="col-sm-2">
+                    <div class="col-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header" id="secondDay"></div>
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-header" id="firstDay"></div>
-                                        <!-- <h5 class="card-header">Day 1</h5> -->
-                                        <div class="card">
-                                            <img class="card-img-top" src="" alt="">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <img class="card-img-top" src="" alt="">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-wind"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-moisture"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-sun"></i></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header" id="thirdDay"></div>
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-header" id="secondDay"></div>
-                                        <!-- <h5 class="card-header">Day 2</h5> -->
-                                        <div class="card">
-                                            <img class="card-img-top" src="" alt="">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <img class="card-img-top" src="" alt="">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-wind"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-moisture"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-sun"></i></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header" id="forthDay"></div>
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-header" id="thirdDay"></div>
-                                        <!-- <h5 class="card-header">Day 3</h5> -->
-                                        <div class="card">
-                                            <img class="card-img-top" src="" alt="">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <img class="card-img-top" src="" alt="">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-wind"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-moisture"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-sun"></i></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header" id="fifthDay"></div>
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-header" id="forthDay"></div>
-                                        <!-- <h5 class="card-header">Day 4</h5> -->
-                                        <div class="card">
-                                            <img class="card-img-top" src="" alt="">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <!-- <h5 class="card-header">Day 5</h5> -->
-                                        <div class="card-header" id="fifthDay"></div>
-                                        <div class="card">
-                                            <img class="card-img-top" src="" alt="">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-wind"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-moisture"></i></li>
-                                                <li class="list-group-item"><i class="bi bi-sun"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <img class="card-img-top" src="" alt="">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="bi bi-thermometer-high"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-wind"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-moisture"></i></li>
+                                        <li class="list-group-item"><i class="bi bi-sun"></i></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -154,33 +174,30 @@
                 </div>
             </div>
         </div>
-
-        <!-- Bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-            integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-            crossorigin="anonymous"></script>
-
-
-        <script src="https://kit.fontawesome.com/6cdd58adbf.js" crossorigin="anonymous"></script>
-        <!-- Moment js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!--  Google map api-->
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcHVySTdTxlPSlzDpyXh6QngzWWKIiKqc&callback=initAutocomplete&libraries=places&v=weekly&channel=2"
-            async></script>
-
-        <!-- Js -->
-        <script src="./assets/js/script.js"></script>
-
-
-    </body>
+    </div>
+    </div>
+-->
+            <!-- Bootstrap -->
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+                integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+                crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/6cdd58adbf.js" crossorigin="anonymous"></script>
+            <!-- Moment js -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+                integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <!--  Google map api-->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcHVySTdTxlPSlzDpyXh6QngzWWKIiKqc&callback=initAutocomplete&libraries=places&v=weekly&channel=2"
+                async></script>
+            <!-- Js -->
+            <script src="./assets/js/script.js"></script>
+</body>
 
 </html>

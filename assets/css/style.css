@@ -13,6 +13,7 @@
   font-size            : 20px;
   padding              : 10px 20px 10px 20px;
   text-decoration      : none;
+  width: fit-content;
 }
 
 .btn:hover {
@@ -31,4 +32,16 @@
 
 .col-sm-2 {
   display: inline-block;
+}
+#city-form .btn {
+  font-family    : Arial;
+    font-size      : 20px;
+    /* padding        : 10px 40px 10px 40px; */
+    text-decoration: none;
+    /* width          : 100%; */
+    align-content: center;
+    
+}
+#city-form {
+  width: 100%;
 }
