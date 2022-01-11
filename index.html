@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42bab3163be9495c32793d79f99cd34271e3a639
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
+<<<<<<< HEAD
 
 <body>
 
@@ -168,6 +172,181 @@
                                         <li class="list-group-item"><i class="bi bi-sun"></i></li>
                                     </ul>
                                 </div>
+=======
+<body>
+    <!------------------------------------>
+    <!--            Nav             -->
+    <!------------------------------------>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary justify-content-center">
+        <h1>Weather Dashboard</h1>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <!------------------------------------>
+            <!--        Search Sections         -->
+            <!------------------------------------>
+            <div class="col-3 bg-light">
+                <p>Search for City</p>
+                <input id="searchTextField" class="controls" type="text" placeholder="Enter the City Name" />
+                <button class="btn btn-primary " type="submit" id="search-btn"><i class="bi bi-search"></i></button>
+                <div id="map"></div>
+                <!-- <button class="btn btn-danger" type="button" id="clear-search-history"><i class="bi bi-archive-fill"> Clear </i></button> -->
+                <form id="search_history"></form>
+            </div>
+            <div class="col-lg-8">
+                <!------------------------------------>
+                <!--            Weather             -->
+                <!------------------------------------>
+                <h5>Today's Weather</h5>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="card today-card">
+                            <h5><span id="city-name"></span></h5>
+                            <h5><span id="today-date"></span></h5>
+                            <img id="currentWeatherIcon" src="" alt="">
+                            <table>
+                                <tr>
+                                    <th><i class="bi bi-thermometer-high"></i> Temperature <i
+                                            class="bi bi-thermometer-high"></i></th>
+                                    <th><i class="bi bi-moisture"></i> Humidity <i class="bi bi-moisture"></i></th>
+                                    <th><i class="bi bi-wind"></i> Wind <i class="bi bi-wind"></i></th>
+                                    <th><i class="bi bi-sun"></i> UV-Index <i class="bi bi-sun"></i></th>
+                                </tr>
+                                <tr>
+                                    <td><span id="currentTemp"></span></td>
+                                    <td><span id="currentHumidity"></span></td>
+                                    <td><span id="currentWind"></span></td>
+                                    <td><span id="currentUV"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>°F</td>
+                                    <td>%</td>
+                                    <td>mph</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!------------------------------------>
+                <!--            Forecast            -->
+                <!------------------------------------>
+                <div id="forecast">
+                    <h5>5-Day Forecast</h5>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="card forecast-card">
+                                <h6 id="firstDay"></h6>
+                                <img src="" alt="" id="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i></th>
+                                        <th><i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-wind"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="temp1"></span></td>
+                                        <td><span id="humid1"></span></td>
+                                        <td><span id="wind1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>mph</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card forecast-card">
+                                <h6 id="secondDay"></h6>
+                                <img src="" alt="" id="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i></th>
+                                        <th><i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-wind"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="temp1"></span></td>
+                                        <td><span id="humid1"></span></td>
+                                        <td><span id="wind1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>mph</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card forecast-card">
+                                <h6 id="thirdDay"></h6>
+                                <img src="" alt="" id="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i></th>
+                                        <th><i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-wind"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="temp1"></span></td>
+                                        <td><span id="humid1"></span></td>
+                                        <td><span id="wind1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>mph</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card forecast-card">
+                                <h6 id="forthDay"></h6>
+                                <img src="" alt="" id="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i></th>
+                                        <th><i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-wind"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="temp1"></span></td>
+                                        <td><span id="humid1"></span></td>
+                                        <td><span id="wind1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>mph</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card forecast-card">
+                                <h6 id="fifthDay"></h6>
+                                <img src="" alt="" id="">
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-thermometer-high"></i></th>
+                                        <th><i class="bi bi-moisture"></i></th>
+                                        <th><i class="bi bi-wind"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <td><span id="temp1"></span></td>
+                                        <td><span id="humid1"></span></td>
+                                        <td><span id="wind1"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>°F</td>
+                                        <td>%</td>
+                                        <td>mph</td>
+                                    </tr>
+                                </table>
+>>>>>>> 42bab3163be9495c32793d79f99cd34271e3a639
                             </div>
                         </div>
                     </div>
@@ -175,6 +354,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     </div>
 -->
             <!-- Bootstrap -->
@@ -200,4 +380,28 @@
             <script src="./assets/js/script.js"></script>
 </body>
 
+=======
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6cdd58adbf.js" crossorigin="anonymous"></script>
+    <!-- Moment js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--  Google map api-->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcHVySTdTxlPSlzDpyXh6QngzWWKIiKqc&callback=initAutocomplete&libraries=places&v=weekly&channel=2"
+        async></script>
+    <!-- Js -->
+    <script src="./assets/js/script.js"></script>
+</body>
+>>>>>>> 42bab3163be9495c32793d79f99cd34271e3a639
 </html>
