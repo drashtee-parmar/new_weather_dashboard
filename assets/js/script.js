@@ -17,14 +17,12 @@ var pastCitySearchBtnEl = document.querySelector("#buttons");
 /* -------------------------------------------------------------------  */
 /*                                Current                               */
 /* -------------------------------------------------------------------  */
-
 var currentDtEl = document.querySelector("#current-date");
 var currentIconEl = document.querySelector("#current-icon");
 var currentTempEl = document.querySelector("#currentTemp");
 var currentHumidEl = document.querySelector("#currentHumid");
 var currentWindEl = document.querySelector("#currentWind");
 var currentUVEl = document.querySelector("#currentUV");
-
 /* -------------------------------------------------------------------  */
 /*                                  Temperature                         */
 /* -------------------------------------------------------------------  */
@@ -33,7 +31,6 @@ var temp2El = document.querySelector("#temp2");
 var temp3El = document.querySelector("#temp3");
 var temp4El = document.querySelector("#temp4");
 var temp5El = document.querySelector("#temp5");
-
 /* -------------------------------------------------------------------  */
 /*                                Humidity                              */
 /* -------------------------------------------------------------------  */
@@ -42,7 +39,6 @@ var humid2El = document.querySelector("#humid2");
 var humid3El = document.querySelector("#humid3");
 var humid4El = document.querySelector("#humid4");
 var humid5El = document.querySelector("#humid5");
-
 /* -------------------------------------------------------------------  */
 /*                                  Wind                                */
 /* -------------------------------------------------------------------  */
@@ -51,7 +47,6 @@ var wind2El = document.querySelector("#wind2");
 var wind3El = document.querySelector("#wind3");
 var wind4El = document.querySelector("#wind4");
 var wind5El = document.querySelector("#wind5");
-
 /* -------------------------------------------------------------------  */
 /*                            Forecast days                             */
 /* -------------------------------------------------------------------  */
@@ -60,11 +55,17 @@ var day2El = document.querySelector("#secondDay");
 var day3El = document.querySelector("#thirdDay");
 var day4El = document.querySelector("#forthDay");
 var day5El = document.querySelector("#fifthDay");
-
 /* -------------------------------------------------------------------  */
-/*                              Get Current Weather                             */
+/*                            Icons                             */
 /* -------------------------------------------------------------------  */
-
+var forecastIcon1El = document.querySelector("#icon1");
+var forecastIcon2El = document.querySelector("#icon2");
+var forecastIcon3El = document.querySelector("#icon3");
+var forecastIcon4El = document.querySelector("#icon4");
+var forecastIcon5El = document.querySelector("#icon5");
+/* -------------------------------------------------------------------  */
+/*                              Get Current Weather                     */
+/* -------------------------------------------------------------------  */
 function getWeather(city) {
   var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherApiKey + "&units=" + unit;
   fetch(weatherUrl).then((response) => {
@@ -73,7 +74,6 @@ function getWeather(city) {
     });
   });
 }
-
 /* -------------------------------------------------------------------  */
 /*         Show Current Weather: icon, temp, humidity, wind             */
 /*                https://openweathermap.org/current                    */
@@ -89,18 +89,55 @@ function showCurrentWeather(weather, searchQuery) {
   currentHumidEl.innerHTML = weatherHumidEl;
   currentWindEl.innerHTML = weatherWindEl;
 }
-
-
-
-
-
+/* -------------------------------------------------------------------  */
+/*                              Get Forecast                            */
+/* -------------------------------------------------------------------  */
+function getForecast(city) {
+  var weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + weatherApiKey + "&units=" + unit;
+  fetch(weatherUrl).then((response) => {
+    response.json().then((data) => {
+      showForecast(data, city);
+    });
+  });
+}
+function showForecast(forecast, searchQuery){
+  cityFormEl.textContent = searchQuery;
+  /* First day forecast */
+temp1El.innerHTML = forecast.list[0].main.temp;
+humid1El.innerHTML = forecast.list[0].main.humidity;
+wind1El.innerHTML = forecast.list[0].wind.speed;
+var icon1El = forecast.list[0].weather[0].icon;
+forecastIcon1El.src =  "https://openweathermap.org/img/wn/" + icon1El + "@2x.png";
+  /* Second day forecast */
+  temp2El.innerHTML = forecast.list[1].main.temp;
+  humid2El.innerHTML = forecast.list[1].main.humidity;
+  wind2El.innerHTML = forecast.list[1].wind.speed;
+  var icon2El = forecast.list[1].weather[0].icon;
+  forecastIcon2El.src =  "https://openweathermap.org/img/wn/" + icon2El + "@2x.png";
+    /* Third day forecast */
+temp3El.innerHTML = forecast.list[2].main.temp;
+humid3El.innerHTML = forecast.list[2].main.humidity;
+wind3El.innerHTML = forecast.list[2].wind.speed;
+var icon3El = forecast.list[2].weather[0].icon;
+forecastIcon3El.src =  "https://openweathermap.org/img/wn/" + icon3El + "@2x.png";
+  /* Forth day forecast */
+  temp4El.innerHTML = forecast.list[3].main.temp;
+  humid4El.innerHTML = forecast.list[3].main.humidity;
+  wind4El.innerHTML = forecast.list[3].wind.speed;
+  var icon4El = forecast.list[3].weather[0].icon;
+  forecastIcon4El.src =  "https://openweathermap.org/img/wn/" + icon4El + "@2x.png";
+    /* Fifth day forecast */
+temp5El.innerHTML = forecast.list[4].main.temp;
+humid5El.innerHTML = forecast.list[4].main.humidity;
+wind5El.innerHTML = forecast.list[4].wind.speed;
+var icon5El = forecast.list[4].weather[0].icon;
+forecastIcon5El.src =  "https://openweathermap.org/img/wn/" + icon5El + "@2x.png";
+}
 /* -------------------------------------------------------------------  */
 /*          handle submit event                                         */
 /*          show and save list button with history                      */
 /*          Retrive from local storage                                  */
 /* -------------------------------------------------------------------  */
-
-
 function formSubmitHandler(event) {
   event.preventDefault();
   let cityEl = inputTxtEl.value.trim(); // TODO
@@ -115,6 +152,7 @@ function formSubmitHandler(event) {
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   if (cityEl) {
     getWeather(cityEl);
+    getForecast(cityEl);
     inputTxtEl.value = "";
   } else {
     alert("Enter a city name to get the weather!");
@@ -140,6 +178,7 @@ function saveSearch() {
   for (var i = 0; i < pastListBtnEl.length; i++) {
     pastListBtnEl[i].addEventListener("click", (event) => {
       getWeather(event.target.textContent);
+      getForecast(event.target.textContent);
     });
   }
 }
@@ -147,12 +186,9 @@ function saveSearch() {
 cityFormEl.addEventListener("submit", formSubmitHandler);
 listCity();
 saveSearch();
-
-
 /* ------------------------------------------------------------------  */
 /* Google API autocomplete: enable Maps JavaScript API and Places API  */
 /* ------------------------------------------------------------------- */
-
 function initAutocomplete() {
   // Create the search box and link it to the UI element.
   const searchTxtEl = document.getElementById("searchTextField");
@@ -165,19 +201,15 @@ function initAutocomplete() {
     }
   });
 }
-
 /* -------------------------------------------------------  */
 /*                  Today's Data                             */
 /* -------------------------------------------------------  */
-
 var currentDt = moment().format("L");
 currentDtEl.innerHTML = currentDt;
 console.log(currentDt);
-
 /* -------------------------------------------------------  */
 /*                  Five day forecast                       */
 /* -------------------------------------------------------  */
-
 /* Day 1 */
 var day1 = moment().add(1, "days").format("L");
 day1El.innerHTML = day1;

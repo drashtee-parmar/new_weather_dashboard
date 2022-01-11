@@ -11,6 +11,10 @@ Two options are provided the first one is link and second one thats click me tha
   - https://dparmar32.github.io/new_weather_dashboard/
   - [Click Here](https://dparmar32.github.io/new_weather_dashboard/)
 
+## Tools Used
+- [Postman](https://www.postman.com/)
+- [JSON Editor](https://jsoneditoronline.org/)
+
 ## References
 
 - [Moment](https://momentjs.com/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library)
