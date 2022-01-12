@@ -1,3 +1,6 @@
+body{
+  background-color: slategrey;
+}
 .btn {
   background           : #3498db;
   background-image     : -webkit-linear-gradient(top, #3498db, #2980b9);
@@ -24,6 +27,7 @@
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration : none;
 }
+
 .card-header {
   text-align: center;
 }
@@ -59,4 +63,13 @@ h6 {
 #icon4,
 #icon5 {
   margin: auto;
+}
+tr{
+  text-align: center;
+}
+.forecastCard {
+  font-size    : .9rem;
+    height       : fit-content;
+    margin-bottom: .2vh;
+    margin-top   : .2vh;
 }
