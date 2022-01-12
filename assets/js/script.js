@@ -269,20 +269,21 @@ listCity();
 saveSearch();
 /* ------------------------------------------------------------------  */
 /* Google API autocomplete: enable Maps JavaScript API and Places API  */
-
+/*                        Need to be a function                         */
 /* ------------------------------------------------------------------- */
-// function initAutocomplete() {
-//     // Create the search box and link it to the UI element.
-//     const searchTxtEl = document.getElementById("searchTextField");
-//     const searchBox = new google.maps.places.SearchBox(searchTxtEl);
-//     // map.controls[google.maps.ControlPosition].push(searchTxtEl);
-//     searchBox.addListener("places_changed", () => {
-//         const places = searchBox.getPlaces();
-//         if (places.length == 0) {
-//             return;
-//         }
-//     });
-// }
+function initAutocomplete() {
+    // Create the search box and link it to the UI element.
+    const searchTxtEl = document.getElementById("searchTextField");
+    const searchBox = new google.maps.places.SearchBox(searchTxtEl);
+    // map.controls[google.maps.ControlPosition].push(searchTxtEl);
+    searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces();
+        if (places.length !== 0) {
+        } else {
+            return;
+        }
+    });
+}
 
 /* -------------------------------------------------------  */
 /*                  Today's Data                             */
