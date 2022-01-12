@@ -65,6 +65,7 @@ Two options are provided the first one is link and second one thats click me tha
 
 ## API Used
 - [AutoComplete Google API](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)
+- [Map](https://developer.generalmagic.com/documentation/JavaScript/guide_places_switch_to_GEM.php)
 - [Weather API](https://openweathermap.org/api)
 
 ## References
