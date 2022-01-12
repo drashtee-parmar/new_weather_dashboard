@@ -56,7 +56,7 @@ let day3El = document.querySelector("#thirdDay");
 let day4El = document.querySelector("#forthDay");
 let day5El = document.querySelector("#fifthDay");
 /* -------------------------------------------------------------------  */
-/*                            Icons                             */
+/*                               Icons                                 */
 /* -------------------------------------------------------------------  */
 let forecastIcon1El = document.querySelector("#icon1");
 let forecastIcon2El = document.querySelector("#icon2");
@@ -65,7 +65,6 @@ let forecastIcon4El = document.querySelector("#icon4");
 let forecastIcon5El = document.querySelector("#icon5");
 /* -------------------------------------------------------------------  */
 /*                              Get Current Weather                     */
-
 /* -------------------------------------------------------------------  */
 const getWeather = city => {
     let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=${unit}`;
@@ -79,7 +78,6 @@ const getWeather = city => {
 /* -------------------------------------------------------------------  */
 /*         Show Current Weather: icon, temp, humidity, wind             */
 /*                https://openweathermap.org/current                    */
-
 /* -------------------------------------------------------------------  */
 const showCurrentWeather = (weather, searchQuery) => {
     searchedCityEl.textContent = searchQuery;
@@ -97,34 +95,32 @@ const showCurrentWeather = (weather, searchQuery) => {
 /*                              Get Forecast                            */
 /* -------------------------------------------------------------------  */
 const getForecast = city => {
-    let weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=${unit}`;
-    fetch(weatherUrl).then((response) => {
+    let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=${unit}`;
+    fetch(forecastURL).then((response) => {
         response.json().then((data) => {
             showForecast(data, city);
             let lat = data.city.coord.lat;
             let lon = data.city.coord.lon;
 
-            function getUVIndex(city) {
+            const getUVIndex = city => {
                 let UVIndexURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=${unit}&appid=${weatherApiKey}`;
                 fetch(UVIndexURL).then((response) => {
                     response.json().then((data) => {
                         currentUVEl.innerHTML = data.value;
-                        if (data.value > 3) {
-                            if (data.value > 3 && data.value <= 10) {
-                                currentUVEl.setAttribute("class", "moderateLevel");
-                            } else {
-                                currentUVEl.setAttribute("class", "severeLevel");
-                            }
-                        } else {
-                            currentUVEl.setAttribute("class", "favorableLevel");
-                        }
+                        // if (data.value > 3) {
+                        //     if (data.value > 3 && data.value <= 10) {
+                        //         currentUVEl.setAttribute(`class`, `moderateLevel`);
+                        //     } else {
+                        //         currentUVEl.setAttribute(`class`, `severeLevel`);
+                        //     }
+                        // } else {
+                        //     currentUVEl.setAttribute(`class`, `favorableLevel`);
+                        // }
                     });
                 });
-            }
-
-            getUVIndex()
+            };
+            getUVIndex();
         });
-
     });
 };
 
@@ -215,13 +211,13 @@ const showForecast = (forecast, searchQuery) => {
 /* -------------------------------------------------------------------  */
 const formSubmitHandler = event => {
     event.preventDefault();
-    let cityEl = inputTxtEl.value.trim(); // TODO
+    let cityEl = inputTxtEl.value.trim();
     let btn = document.createElement("button");
     btn.className = "searched-list btn";
     btn.innerHTML = cityEl;
     buttons.appendChild(btn);
     listCity();
-    if (!(!searchHistory.includes(cityEl) && cityEl != "")) {
+    if (!(!searchHistory.includes(cityEl) && cityEl !== "")) {
     } else {
         searchHistory.push(cityEl);
     }
@@ -270,6 +266,7 @@ saveSearch();
 /* ------------------------------------------------------------------  */
 /* Google API autocomplete: enable Maps JavaScript API and Places API  */
 /*                        Need to be a function                         */
+
 /* ------------------------------------------------------------------- */
 function initAutocomplete() {
     // Create the search box and link it to the UI element.
