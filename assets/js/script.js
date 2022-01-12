@@ -82,7 +82,7 @@ const getWeather = city => {
 
 /* -------------------------------------------------------------------  */
 const showCurrentWeather = (weather, searchQuery) => {
-    cityFormEl.textContent = searchQuery;
+    searchedCityEl.textContent = searchQuery;
     let weatherTempEl = weather.main.temp;
     let weatherHumidEl = weather.main.humidity;
     let weatherWindEl = weather.wind.speed;
@@ -129,7 +129,7 @@ const getForecast = city => {
 };
 
 const showForecast = (forecast, searchQuery) => {
-    cityFormEl.textContent = searchQuery;
+    searchedCityEl.textContent = searchQuery;
     /* First day forecast */
     temp1El.innerHTML = forecast.list[0].main.temp;
     humid1El.innerHTML = forecast.list[0].main.humidity;
@@ -212,7 +212,6 @@ const showForecast = (forecast, searchQuery) => {
 /*          handle submit event                                         */
 /*          show and save list button with history                      */
 /*          Retrive from local storage                                  */
-
 /* -------------------------------------------------------------------  */
 const formSubmitHandler = event => {
     event.preventDefault();
