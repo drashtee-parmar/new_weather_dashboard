@@ -65,171 +65,222 @@ var forecastIcon4El = document.querySelector("#icon4");
 var forecastIcon5El = document.querySelector("#icon5");
 /* -------------------------------------------------------------------  */
 /*                              Get Current Weather                     */
+
 /* -------------------------------------------------------------------  */
 function getWeather(city) {
-  var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherApiKey + "&units=" + unit;
-  fetch(weatherUrl).then((response) => {
-    response.json().then((data) => {
-      showCurrentWeather(data, city);
+    var weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=${unit}`;
+    fetch(weatherUrl).then((response) => {
+        response.json().then((data) => {
+            showCurrentWeather(data, city);
+        });
     });
-  });
 }
+
 /* -------------------------------------------------------------------  */
 /*         Show Current Weather: icon, temp, humidity, wind             */
 /*                https://openweathermap.org/current                    */
+
 /* -------------------------------------------------------------------  */
 function showCurrentWeather(weather, searchQuery) {
-  cityFormEl.textContent = searchQuery;
-  var weatherTempEl = weather.main.temp;
-  var weatherHumidEl = weather.main.humidity;
-  var weatherWindEl = weather.wind.speed;
-  var iconEl = weather.weather[0].icon;
-  currentIconEl.src = "https://openweathermap.org/img/wn/" + iconEl + "@2x.png";
-  currentTempEl.innerHTML = weatherTempEl;
-  currentHumidEl.innerHTML = weatherHumidEl;
-  currentWindEl.innerHTML = weatherWindEl;
+    cityFormEl.textContent = searchQuery;
+    var weatherTempEl = weather.main.temp;
+    var weatherHumidEl = weather.main.humidity;
+    var weatherWindEl = weather.wind.speed;
+    var iconEl = weather.weather[0].icon;
+    currentIconEl.src = `https://openweathermap.org/img/wn/${iconEl}@2x.png`;
+    currentTempEl.innerHTML = weatherTempEl;
+    currentHumidEl.innerHTML = weatherHumidEl;
+    currentWindEl.innerHTML = weatherWindEl;
 }
+
 /* -------------------------------------------------------------------  */
 /*                              Get Forecast                            */
+
 /* -------------------------------------------------------------------  */
 function getForecast(city) {
-  var weatherUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + weatherApiKey + "&units=" + unit;
-  fetch(weatherUrl).then((response) => {
-    response.json().then((data) => {
-      showForecast(data, city);
+    var weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=${unit}`;
+    fetch(weatherUrl).then((response) => {
+        response.json().then((data) => {
+            showForecast(data, city);
+            let lat = data.city.coord.lat;
+            let lon = data.city.coord.lon;
+
+            function getUVIndex(city) {
+                let UVIndexURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=${unit}&appid=${weatherApiKey}`;
+                fetch(UVIndexURL).then((response) => {
+                    response.json().then((data) => {
+                        currentUVEl.innerHTML = data.value;
+                        if (data.value <= 3) {
+                            currentUVEl.setAttribute("class", "favorableLevel");
+                        } else if (data.value > 3 && data.value <= 10) {
+                            currentUVEl.setAttribute("class", "moderateLevel");
+                        } else {
+                            currentUVEl.setAttribute("class", "severeLevel");
+                        }
+                    });
+                });
+            }
+            getUVIndex()
+        });
+
     });
-    var lat = weather.coord.lat;
-    var lon = weather.coord.lon;
-    getUVIndex(data, city);
-  });
 }
+
 function showForecast(forecast, searchQuery) {
-  cityFormEl.textContent = searchQuery;
-  /* First day forecast */
-  temp1El.innerHTML = forecast.list[0].main.temp;
-  humid1El.innerHTML = forecast.list[0].main.humidity;
-  wind1El.innerHTML = forecast.list[0].wind.speed;
-  var icon1El = forecast.list[0].weather[0].icon;
-  forecastIcon1El.src =
-    "https://openweathermap.org/img/wn/" + icon1El + "@2x.png";
-  /* Second day forecast */
-  temp2El.innerHTML = forecast.list[1].main.temp;
-  humid2El.innerHTML = forecast.list[1].main.humidity;
-  wind2El.innerHTML = forecast.list[1].wind.speed;
-  var icon2El = forecast.list[1].weather[0].icon;
-  forecastIcon2El.src =
-    "https://openweathermap.org/img/wn/" + icon2El + "@2x.png";
-  /* Third day forecast */
-  temp3El.innerHTML = forecast.list[2].main.temp;
-  humid3El.innerHTML = forecast.list[2].main.humidity;
-  wind3El.innerHTML = forecast.list[2].wind.speed;
-  var icon3El = forecast.list[2].weather[0].icon;
-  forecastIcon3El.src =
-    "https://openweathermap.org/img/wn/" + icon3El + "@2x.png";
-  /* Forth day forecast */
-  temp4El.innerHTML = forecast.list[3].main.temp;
-  humid4El.innerHTML = forecast.list[3].main.humidity;
-  wind4El.innerHTML = forecast.list[3].wind.speed;
-  var icon4El = forecast.list[3].weather[0].icon;
-  forecastIcon4El.src =
-    "https://openweathermap.org/img/wn/" + icon4El + "@2x.png";
-  /* Fifth day forecast */
-  temp5El.innerHTML = forecast.list[4].main.temp;
-  humid5El.innerHTML = forecast.list[4].main.humidity;
-  wind5El.innerHTML = forecast.list[4].wind.speed;
-  var icon5El = forecast.list[4].weather[0].icon;
-  forecastIcon5El.src =
-    "https://openweathermap.org/img/wn/" + icon5El + "@2x.png";
+    cityFormEl.textContent = searchQuery;
+    /* First day forecast */
+    temp1El.innerHTML = forecast.list[0].main.temp;
+    humid1El.innerHTML = forecast.list[0].main.humidity;
+    wind1El.innerHTML = forecast.list[0].wind.speed;
+    var icon1El = forecast.list[0].weather[0].icon;
+    forecastIcon1El.src =
+        `https://openweathermap.org/img/wn/${icon1El}@2x.png`;
+    /* Second day forecast */
+    temp2El.innerHTML = forecast.list[1].main.temp;
+    humid2El.innerHTML = forecast.list[1].main.humidity;
+    wind2El.innerHTML = forecast.list[1].wind.speed;
+    var icon2El = forecast.list[1].weather[0].icon;
+    forecastIcon2El.src =
+        `https://openweathermap.org/img/wn/${icon2El}@2x.png`;
+    /* Third day forecast */
+    temp3El.innerHTML = forecast.list[2].main.temp;
+    humid3El.innerHTML = forecast.list[2].main.humidity;
+    wind3El.innerHTML = forecast.list[2].wind.speed;
+    var icon3El = forecast.list[2].weather[0].icon;
+    forecastIcon3El.src =
+        `https://openweathermap.org/img/wn/${icon3El}@2x.png`;
+    /* Forth day forecast */
+    temp4El.innerHTML = forecast.list[3].main.temp;
+    humid4El.innerHTML = forecast.list[3].main.humidity;
+    wind4El.innerHTML = forecast.list[3].wind.speed;
+    var icon4El = forecast.list[3].weather[0].icon;
+    forecastIcon4El.src =
+        `https://openweathermap.org/img/wn/${icon4El}@2x.png`;
+    /* Fifth day forecast */
+    temp5El.innerHTML = forecast.list[4].main.temp;
+    humid5El.innerHTML = forecast.list[4].main.humidity;
+    wind5El.innerHTML = forecast.list[4].wind.speed;
+    var icon5El = forecast.list[4].weather[0].icon;
+    forecastIcon5El.src =
+        `https://openweathermap.org/img/wn/${icon5El}@2x.png`;
 }
+
 /* -------------------------------------------------------------------  */
 /*                              Get UV-Index                            */
+
 /* -------------------------------------------------------------------  */
-function getUVIndex(lat, lon) {
-  var UVIndexUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + weatherApiKey;
-  fetch(UVIndexUrl).then((response) => {
-    response.json().then((data) => {
-      showUVIndex(data, city);
-    });
-  });
-}
-function showUVIndex(uvIndex, searchQuery) {
-  currentUVEl.innerHTML = data.value;
-  if (data.value <= 3) {
-    currentUVEl.setAttribute("class", "favorableLevel");
-  } else if (data.value > 3 && data.value <= 10) {
-    currentUVEl.setAttribute("class", "moderateLevel");
-  } else {
-    currentUVEl.setAttribute("class", "severeLevel");
-  }
-}
+// function getUVIndex(lat, lon) {
+//     // var UVIndexUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + weatherApiKey;
+//     // "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,hourly&units="  + unit + "&appid= " + weatherApiKey;
+//     // var UVIndexUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,hourly&units=" + unit + "&appid= " + weatherApiKey;
+//     // fetch(UVIndexUrl).then((response) => {
+//     //     response.json().then((data) => {
+//     //         showUVIndex(data);
+//     //     });
+//     // });
+// }
+
+// function  getUVIndex(city){
+//     var lat = city.lat;
+//     var lon = city.lon;
+//         var UVIndexUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=current,minutely,hourly&units=" + unit + "&appid= " + weatherApiKey;
+//         console.log(UVIndexUrl);
+//         fetch(UVIndexUrl)
+//             .then(function (response) {
+//                 return response.json();
+//             })
+//             .then(function (data){
+//                 console.log(data);
+//                 showUVIndex(uvIndex, searchQuery)
+//             })
+// }
+//
+//
+// function showUVIndex(uvIndex, searchQuery) {
+//     currentUVEl.innerHTML = data.value;
+//     if (data.value <= 3) {
+//         currentUVEl.setAttribute("class", "favorableLevel");
+//     } else if (data.value > 3 && data.value <= 10) {
+//         currentUVEl.setAttribute("class", "moderateLevel");
+//     } else {
+//         currentUVEl.setAttribute("class", "severeLevel");
+//     }
+// }
+
 /* -------------------------------------------------------------------  */
 /*          handle submit event                                         */
 /*          show and save list button with history                      */
 /*          Retrive from local storage                                  */
+
 /* -------------------------------------------------------------------  */
 function formSubmitHandler(event) {
-  event.preventDefault();
-  let cityEl = inputTxtEl.value.trim(); // TODO
-  let btn = document.createElement("button");
-  btn.className = "searched-list btn";
-  btn.innerHTML = cityEl;
-  buttons.appendChild(btn);
-  listCity();
-  if (!searchHistory.includes(cityEl) && cityEl != "") {
-    searchHistory.push(cityEl);
-  }
-  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-  if (cityEl) {
-    getWeather(cityEl);
-    getForecast(cityEl);
-    inputTxtEl.value = "";
-  } else {
-    alert("Enter a city name to get the weather!");
-  }
-}
-function listCity() {
-  searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
-  if (!searchHistory) {
-    searchHistory = [];
-  }
-}
-function saveSearch() {
-  for (var i = 0; i < searchHistory.length; i++) {
-    var btn = document.createElement("button");
+    event.preventDefault();
+    let cityEl = inputTxtEl.value.trim(); // TODO
+    let btn = document.createElement("button");
     btn.className = "searched-list btn";
-    btn.innerHTML = searchHistory[i];
+    btn.innerHTML = cityEl;
     buttons.appendChild(btn);
-  }
-  /* ************************************************* */
-  /* Past Search Button                                */
-  /* ************************************************* */
-  var pastListBtnEl = document.querySelectorAll(".searched-list");
-  for (var i = 0; i < pastListBtnEl.length; i++) {
-    pastListBtnEl[i].addEventListener("click", (event) => {
-      getWeather(event.target.textContent);
-      getForecast(event.target.textContent);
-    });
-  }
+    listCity();
+    if (!searchHistory.includes(cityEl) && cityEl != "") {
+        searchHistory.push(cityEl);
+    }
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    if (cityEl) {
+        getWeather(cityEl);
+        getForecast(cityEl);
+        inputTxtEl.value = "";
+    } else {
+        alert("Enter a city name to get the weather!");
+    }
 }
+
+function listCity() {
+    searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+    if (!searchHistory) {
+        searchHistory = [];
+    }
+}
+
+function saveSearch() {
+    for (var i = 0; i < searchHistory.length; i++) {
+        var btn = document.createElement("button");
+        btn.className = "searched-list btn";
+        btn.innerHTML = searchHistory[i];
+        buttons.appendChild(btn);
+    }
+    /* ************************************************* */
+    /* Past Search Button                                */
+    /* ************************************************* */
+    var pastListBtnEl = document.querySelectorAll(".searched-list");
+    for (var i = 0; i < pastListBtnEl.length; i++) {
+        pastListBtnEl[i].addEventListener("click", (event) => {
+            getWeather(event.target.textContent);
+            getForecast(event.target.textContent);
+        });
+    }
+}
+
 /* Listen to the submitted query form */
 cityFormEl.addEventListener("submit", formSubmitHandler);
 listCity();
 saveSearch();
 /* ------------------------------------------------------------------  */
 /* Google API autocomplete: enable Maps JavaScript API and Places API  */
+
 /* ------------------------------------------------------------------- */
-function initAutocomplete() {
-  // Create the search box and link it to the UI element.
-  const searchTxtEl = document.getElementById("searchTextField");
-  const searchBox = new google.maps.places.SearchBox(searchTxtEl);
-  map.controls[google.maps.ControlPosition].push(searchTxtEl);
-  searchBox.addListener("places_changed", () => {
-    const places = searchBox.getPlaces();
-    if (places.length == 0) {
-      return;
-    }
-  });
-}
+// function initAutocomplete() {
+//     // Create the search box and link it to the UI element.
+//     const searchTxtEl = document.getElementById("searchTextField");
+//     const searchBox = new google.maps.places.SearchBox(searchTxtEl);
+//     // map.controls[google.maps.ControlPosition].push(searchTxtEl);
+//     searchBox.addListener("places_changed", () => {
+//         const places = searchBox.getPlaces();
+//         if (places.length == 0) {
+//             return;
+//         }
+//     });
+// }
+
 /* -------------------------------------------------------  */
 /*                  Today's Data                             */
 /* -------------------------------------------------------  */

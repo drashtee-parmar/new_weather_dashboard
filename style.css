@@ -38,3 +38,12 @@ h6 {
   font-weight: 900;
   text-align : center;
 }
+.favorableLevel{
+  background-color: green;
+}
+.moderateLevel{
+  background-color: yellow;
+}
+.severeLevel{
+  background-color: red;
+}
