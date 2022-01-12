@@ -67,21 +67,21 @@ let forecastIcon5El = document.querySelector("#icon5");
 /*                              Get Current Weather                     */
 
 /* -------------------------------------------------------------------  */
-function getWeather(city) {
+const getWeather = city => {
     let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=${unit}`;
     fetch(weatherUrl).then((response) => {
         response.json().then((data) => {
             showCurrentWeather(data, city);
         });
     });
-}
+};
 
 /* -------------------------------------------------------------------  */
 /*         Show Current Weather: icon, temp, humidity, wind             */
 /*                https://openweathermap.org/current                    */
 
 /* -------------------------------------------------------------------  */
-function showCurrentWeather(weather, searchQuery) {
+const showCurrentWeather = (weather, searchQuery) => {
     cityFormEl.textContent = searchQuery;
     let weatherTempEl = weather.main.temp;
     let weatherHumidEl = weather.main.humidity;
@@ -91,13 +91,12 @@ function showCurrentWeather(weather, searchQuery) {
     currentTempEl.innerHTML = weatherTempEl;
     currentHumidEl.innerHTML = weatherHumidEl;
     currentWindEl.innerHTML = weatherWindEl;
-}
+};
 
 /* -------------------------------------------------------------------  */
 /*                              Get Forecast                            */
-
 /* -------------------------------------------------------------------  */
-function getForecast(city) {
+const getForecast = city => {
     let weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=${unit}`;
     fetch(weatherUrl).then((response) => {
         response.json().then((data) => {
@@ -110,23 +109,26 @@ function getForecast(city) {
                 fetch(UVIndexURL).then((response) => {
                     response.json().then((data) => {
                         currentUVEl.innerHTML = data.value;
-                        if (data.value <= 3) {
-                            currentUVEl.setAttribute("class", "favorableLevel");
-                        } else if (data.value > 3 && data.value <= 10) {
-                            currentUVEl.setAttribute("class", "moderateLevel");
+                        if (data.value > 3) {
+                            if (data.value > 3 && data.value <= 10) {
+                                currentUVEl.setAttribute("class", "moderateLevel");
+                            } else {
+                                currentUVEl.setAttribute("class", "severeLevel");
+                            }
                         } else {
-                            currentUVEl.setAttribute("class", "severeLevel");
+                            currentUVEl.setAttribute("class", "favorableLevel");
                         }
                     });
                 });
             }
+
             getUVIndex()
         });
 
     });
-}
+};
 
-function showForecast(forecast, searchQuery) {
+const showForecast = (forecast, searchQuery) => {
     cityFormEl.textContent = searchQuery;
     /* First day forecast */
     temp1El.innerHTML = forecast.list[0].main.temp;
@@ -163,11 +165,10 @@ function showForecast(forecast, searchQuery) {
     let icon5El = forecast.list[4].weather[0].icon;
     forecastIcon5El.src =
         `https://openweathermap.org/img/wn/${icon5El}@2x.png`;
-}
+};
 
 /* -------------------------------------------------------------------  */
 /*                              Get UV-Index                            */
-
 /* -------------------------------------------------------------------  */
 // function getUVIndex(lat, lon) {
 //     // var UVIndexUrl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + weatherApiKey;
@@ -213,7 +214,7 @@ function showForecast(forecast, searchQuery) {
 /*          Retrive from local storage                                  */
 
 /* -------------------------------------------------------------------  */
-function formSubmitHandler(event) {
+const formSubmitHandler = event => {
     event.preventDefault();
     let cityEl = inputTxtEl.value.trim(); // TODO
     let btn = document.createElement("button");
@@ -221,36 +222,39 @@ function formSubmitHandler(event) {
     btn.innerHTML = cityEl;
     buttons.appendChild(btn);
     listCity();
-    if (!searchHistory.includes(cityEl) && cityEl != "") {
+    if (!(!searchHistory.includes(cityEl) && cityEl != "")) {
+    } else {
         searchHistory.push(cityEl);
     }
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-    if (cityEl) {
+    if (!cityEl) {
+        alert("Enter a city name to get the weather!");
+    } else {
         getWeather(cityEl);
         getForecast(cityEl);
         inputTxtEl.value = "";
-    } else {
-        alert("Enter a city name to get the weather!");
     }
-}
+};
 
-function listCity() {
+const listCity = () => {
     searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
-    if (!searchHistory) {
-        searchHistory = [];
+    if (searchHistory) {
+        return;
     }
-}
+    searchHistory = [];
+};
 
-function saveSearch() {
+const saveSearch = () => {
     for (let i = 0; i < searchHistory.length; i++) {
         let btn = document.createElement("button");
         btn.className = "searched-list btn";
         btn.innerHTML = searchHistory[i];
         buttons.appendChild(btn);
     }
-    /* ************************************************* */
-    /* Past Search Button                                */
-    /* ************************************************* */
+    /* -------------------------------------------------------------------  */
+    /*                        Past Search Button                            */
+    /* -------------------------------------------------------------------  */
+
     let pastListBtnEl = document.querySelectorAll(".searched-list");
     for (let i = 0; i < pastListBtnEl.length; i++) {
         pastListBtnEl[i].addEventListener("click", (event) => {
@@ -258,7 +262,7 @@ function saveSearch() {
             getForecast(event.target.textContent);
         });
     }
-}
+};
 
 /* Listen to the submitted query form */
 cityFormEl.addEventListener("submit", formSubmitHandler);
