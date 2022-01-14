@@ -1,6 +1,4 @@
-body{
-  background-color: slategrey;
-}
+/* Button */
 .btn {
   background           : #3498db;
   background-image     : -webkit-linear-gradient(top, #3498db, #2980b9);
@@ -17,6 +15,8 @@ body{
   padding              : 10px 20px 10px 20px;
   text-decoration      : none;
   width                : fit-content;
+  margin-bottom        : 10px;
+  margin-top           : 10px;
 }
 .btn:hover {
   background      : #3cb0fd;
@@ -27,9 +27,20 @@ body{
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration : none;
 }
-
+/* card */
 .card-header {
   text-align: center;
+}
+.today-card {
+  background-color: #3498db;
+  text-align      : center;
+}
+.forecastCard {
+  font-size       : .9rem;
+  /* height       : fit-content; */
+  margin-bottom   : .2vh;
+  margin-top      : .2vh;
+  background      : #3498db;
 }
 .col-sm-2 {
   display: inline-block;
@@ -42,11 +53,6 @@ body{
 }
 #city-form {
   width: 100%;
-}
-#forecastCard {
-  height       : fit-content;
-  margin-bottom: .2vh;
-  margin-top   : .2vh;
 }
 img {
   width: 90px;
@@ -64,12 +70,15 @@ h6 {
 #icon5 {
   margin: auto;
 }
-tr{
+tr {
   text-align: center;
 }
-.forecastCard {
-  font-size    : .9rem;
-    height       : fit-content;
-    margin-bottom: .2vh;
-    margin-top   : .2vh;
+.moderateLevel {
+  background-color: rgb(255, 204, 29);
+}
+.severeLevel {
+  background-color: rgb(255, 23, 0);
+}
+.favorableLevel {
+  background-color: rgb(78, 159, 61);
 }
