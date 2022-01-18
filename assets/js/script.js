@@ -23,6 +23,7 @@ let currentTempEl = document.querySelector("#currentTemp");
 let currentHumidEl = document.querySelector("#currentHumid");
 let currentWindEl = document.querySelector("#currentWind");
 let currentUVEl = document.querySelector("#currentUV");
+let currentDescEl = document.querySelector("#current-description");
 /* -------------------------------------------------------------------  */
 /*                                  Temperature                         */
 /* -------------------------------------------------------------------  */
@@ -56,6 +57,14 @@ let day3El = document.querySelector("#thirdDay");
 let day4El = document.querySelector("#forthDay");
 let day5El = document.querySelector("#fifthDay");
 /* -------------------------------------------------------------------  */
+/*                Forecast days  Descriptions                           */
+/* -------------------------------------------------------------------  */
+let desc1El = document.querySelector("#firstDay_desc");
+let desc2El = document.querySelector("#secondDay_desc");
+let desc3El = document.querySelector("#thirdDay_desc");
+let desc4El = document.querySelector("#forthDay_desc");
+let desc5El = document.querySelector("#fifthDay_desc");
+/* -------------------------------------------------------------------  */
 /*                               Icons                                 */
 /* -------------------------------------------------------------------  */
 let forecastIcon1El = document.querySelector("#icon1");
@@ -83,8 +92,10 @@ const showCurrentWeather = (weather, searchQuery) => {
   let weatherTempEl = weather.main.temp;
   let weatherHumidEl = weather.main.humidity;
   let weatherWindEl = weather.wind.speed;
+  let weatherDescription = weather.weather[0].description;
   let iconEl = weather.weather[0].icon;
   currentIconEl.src = `https://openweathermap.org/img/wn/${iconEl}@2x.png`;
+  currentDescEl.innerHTML = weatherDescription;
   currentTempEl.innerHTML = weatherTempEl;
   currentHumidEl.innerHTML = weatherHumidEl;
   currentWindEl.innerHTML = weatherWindEl;
@@ -128,30 +139,35 @@ const showForecast = (forecast, searchQuery) => {
   temp1El.innerHTML = forecast.list[0].main.temp;
   humid1El.innerHTML = forecast.list[0].main.humidity;
   wind1El.innerHTML = forecast.list[0].wind.speed;
+  desc1El.innerHTML = forecast.list[0].weather[0].description;
   let icon1El = forecast.list[0].weather[0].icon;
   forecastIcon1El.src = `https://openweathermap.org/img/wn/${icon1El}@2x.png`;
   /* Second day forecast */
   temp2El.innerHTML = forecast.list[1].main.temp;
   humid2El.innerHTML = forecast.list[1].main.humidity;
   wind2El.innerHTML = forecast.list[1].wind.speed;
+  desc2El.innerHTML = forecast.list[1].weather[0].description;
   let icon2El = forecast.list[1].weather[0].icon;
   forecastIcon2El.src = `https://openweathermap.org/img/wn/${icon2El}@2x.png`;
   /* Third day forecast */
   temp3El.innerHTML = forecast.list[2].main.temp;
   humid3El.innerHTML = forecast.list[2].main.humidity;
   wind3El.innerHTML = forecast.list[2].wind.speed;
+  desc3El.innerHTML = forecast.list[2].weather[0].description;
   let icon3El = forecast.list[2].weather[0].icon;
   forecastIcon3El.src = `https://openweathermap.org/img/wn/${icon3El}@2x.png`;
   /* Forth day forecast */
   temp4El.innerHTML = forecast.list[3].main.temp;
   humid4El.innerHTML = forecast.list[3].main.humidity;
   wind4El.innerHTML = forecast.list[3].wind.speed;
+  desc4El.innerHTML = forecast.list[3].weather[0].description;
   let icon4El = forecast.list[3].weather[0].icon;
   forecastIcon4El.src = `https://openweathermap.org/img/wn/${icon4El}@2x.png`;
   /* Fifth day forecast */
   temp5El.innerHTML = forecast.list[4].main.temp;
   humid5El.innerHTML = forecast.list[4].main.humidity;
   wind5El.innerHTML = forecast.list[4].wind.speed;
+  desc5El.innerHTML = forecast.list[4].weather[0].description;
   let icon5El = forecast.list[4].weather[0].icon;
   forecastIcon5El.src = `https://openweathermap.org/img/wn/${icon5El}@2x.png`;
 };
