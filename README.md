@@ -44,7 +44,7 @@ Two options are provided the first one is link and second one thats click me tha
 ### From assignment:
 ![Weather](./assets/images/06-server-side-apis-homework-demo.png)
 ### Project Execution:
-![Weather Project](./assets/images/weatherDashboard.png)
+![Weather Project](./assets/images/weatherDashboardImg.png)
 ## Tools Used
 - [Postman](https://www.postman.com/)
 - [JSON Editor](https://jsoneditoronline.org/)

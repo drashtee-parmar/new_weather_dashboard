@@ -15,27 +15,22 @@
   margin-bottom        : 10px;
   margin-top           : 10px;
 }
-
 .btn:hover {
   background     : #9CECFB;
   background     : -webkit-linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
   background     : linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
   text-decoration: none;
 }
-
 /* card */
 .card-header {
   text-align: center;
 }
-
 .today-card {
   text-align: center;
   background: #74ebd5;
   background: -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);
   background: linear-gradient(to bottom, #ACB6E5, #74ebd5);
-
 }
-
 .forecastCard {
   font-size         : .9rem;
   /* height         : fit-content; */
@@ -47,46 +42,38 @@
   display           : flex;
   flex-direction    : column;
   min-height        : 100%;
-  /* display        : flex; */
-  /* flex-wrap      : wrap; */
-  /* flex           : 0 1 24%; */
-  /* justify-content: space-between; */
 }
-
 .card-search {
   background: #74ebd5;
   background: -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);
   background: linear-gradient(to bottom, #ACB6E5, #74ebd5);
-
 }
-
 .col-sm-2 {
   display: inline-block;
 }
-
 #city-form .btn {
   align-content  : center;
   font-family    : Arial;
   font-size      : 20px;
   text-decoration: none;
-  /* display           : flex; */
   flex-direction    : column;
 }
-
 #city-form {
   width: 100%;
+  flex-direction    : column;
 }
-
 img {
   width: 90px;
 }
-
+/* Header tags */
 h5,
 h6 {
   text-align    : center;
   text-transform: uppercase;
 }
-
+h1{
+  text-transform: uppercase;
+}
 #current-icon,
 #icon1,
 #icon2,
@@ -95,26 +82,24 @@ h6 {
 #icon5 {
   margin: auto;
 }
-
 tr {
   text-align: center;
 }
-
 .moderateLevel {
   background-color: rgb(255, 204, 29);
 }
-
 .severeLevel {
   background-color: rgb(255, 23, 0);
 }
-
 .favorableLevel {
   background-color: rgb(78, 159, 61);
 }
-
 .navbar {
   background: #24C6DC;
   background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);
   background: linear-gradient(to right, #514A9D, #24C6DC);
-
 }
+.text-input{
+  width: 85%;
+}
+
