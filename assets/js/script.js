@@ -67,7 +67,7 @@ let forecastIcon5El = document.querySelector("#icon5");
 /*                              Get Current Weather                     */
 /* -------------------------------------------------------------------  */
 const getWeather = (city) => {
-  let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=${unit}`;
+  let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=${unit}`;
   fetch(weatherUrl).then((response) => {
     response.json().then((data) => {
       showCurrentWeather(data, city);
