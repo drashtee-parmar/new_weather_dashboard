@@ -256,3 +256,7 @@ console.log(day4);
 let day5 = moment().add(5, "days").format("L");
 day5El.innerHTML = day5;
 console.log(day5);
+
+/* Default location */
+getWeather("ATLANTA, GA, USA");
+getForecast("ATLANTA, GA, USA");
