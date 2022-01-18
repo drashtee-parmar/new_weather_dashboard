@@ -246,7 +246,7 @@ function initAutocomplete() {
 /* -------------------------------------------------------  */
 /*                  Today's Data                             */
 /* -------------------------------------------------------  */
-let currentDt = moment().format("L");
+let currentDt = moment().format("dddd, MMMM Do, h:mm a");
 currentDtEl.innerHTML = currentDt;
 console.log(currentDt);
 /* -------------------------------------------------------  */
