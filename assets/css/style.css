@@ -1,11 +1,8 @@
 /* Button */
 .btn {
-  background           : #3498db;
-  background-image     : -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image     : -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image     : -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image     : -o-linear-gradient(top, #3498db, #2980b9);
-  background-image     : linear-gradient(to bottom, #3498db, #2980b9);
+  background           : #24C6DC;
+  background           : -webkit-linear-gradient(to top, #514A9D, #24C6DC);
+  background           : linear-gradient(to top, #514A9D, #24C6DC);
   -webkit-border-radius: 0;
   -moz-border-radius   : 0;
   border-radius        : 0px;
@@ -18,50 +15,72 @@
   margin-bottom        : 10px;
   margin-top           : 10px;
 }
+
 .btn:hover {
-  background      : #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration : none;
+  background     : #9CECFB;
+  background     : -webkit-linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
+  background     : linear-gradient(to bottom, #0052D4, #65C7F7, #9CECFB);
+  text-decoration: none;
 }
+
 /* card */
 .card-header {
   text-align: center;
 }
+
 .today-card {
-  background-color: #3498db;
-  text-align      : center;
+  text-align: center;
+  background: #74ebd5;
+  background: -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);
+  background: linear-gradient(to bottom, #ACB6E5, #74ebd5);
+
 }
+
 .forecastCard {
   font-size       : .9rem;
   /* height       : fit-content; */
   margin-bottom   : .2vh;
   margin-top      : .2vh;
-  background      : #3498db;
+  background      : #74ebd5;
+  background      : -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);
+  background      : linear-gradient(to bottom, #ACB6E5, #74ebd5);
 }
+
+.card-search {
+  background: #74ebd5;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ACB6E5, #74ebd5);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #ACB6E5, #74ebd5);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 .col-sm-2 {
   display: inline-block;
 }
+
 #city-form .btn {
   align-content  : center;
   font-family    : Arial;
   font-size      : 20px;
   text-decoration: none;
 }
+
 #city-form {
   width: 100%;
 }
+
 img {
   width: 90px;
 }
+
 h5,
 h6 {
   text-align    : center;
   text-transform: uppercase;
 }
+
 #current-icon,
 #icon1,
 #icon2,
@@ -70,15 +89,29 @@ h6 {
 #icon5 {
   margin: auto;
 }
+
 tr {
   text-align: center;
 }
+
 .moderateLevel {
   background-color: rgb(255, 204, 29);
 }
+
 .severeLevel {
   background-color: rgb(255, 23, 0);
 }
+
 .favorableLevel {
   background-color: rgb(78, 159, 61);
+}
+
+.navbar {
+  background: #24C6DC;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #514A9D, #24C6DC);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
